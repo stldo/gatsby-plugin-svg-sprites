@@ -28,13 +28,13 @@ module.exports = {
 }
 ```
 
-### SVG sprite loader options
+### options
 
-The `options` parameter is passed directly to SVG sprite loader, more info about its configuration can be found on its [page](https://github.com/kisenka/svg-sprite-loader). By default, this plugin sets `extract` option to `true`, `spriteFilename` to `'sprites.[contenthash].svg'` and `symbolId` to `'[name]--[hash:base64:5]'`. The naming convention is the same as that used by Gatsby for CSS files.
+The `options` parameter is passed directly to SVG sprite loader, more info about these options can be found on [SVG sprite loader documentation](https://github.com/kisenka/svg-sprite-loader). By default, this plugin sets `extract` option to `true`, `spriteFilename` to `'sprites.[contenthash].svg'` and `symbolId` to `'[name]--[hash:base64:5]'`. The naming convention is the same as that used by Gatsby for CSS files.
 
-### SVG sprite loader plugin options
+### pluginOptions
 
-The `pluginOptions` is passed to `svg-sprite-loader/plugin`. If the items in the sprite will only be referred via `<use xlinkHref='...'/>` and not in CSS or `<img>` elements, it is recommended to set `plainSprite` option to `true`, as it allows SVG sprite loader to generate a simpler output.
+The `pluginOptions` parameter is passed to `svg-sprite-loader/plugin`. If the items in the sprite will only be referred via `<use xlinkHref='...'/>`, and not in CSS or `<img>` elements, it is recommended to set `plainSprite` option to `true`, as it allows SVG sprite loader to generate a simpler output.
 
 ## Usage
 
