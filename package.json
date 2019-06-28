@@ -1,0 +1,25 @@
+{
+  "name": "gatsby-plugin-svg-sprite-loader",
+  "description": "Gatsby plugin for creating SVG sprites using SVG sprite loader",
+  "version": "0.1.0",
+  "author": "stldo (https://github.com/stldo)",
+  "license": "MIT",
+  "repository": "https://github.com/stldo/gatsby-plugin-svg-sprite-loader",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "svg",
+    "sprite",
+    "svg sprite",
+    "svg-sprite-loader"
+  ],
+  "dependencies": {
+    "svg-sprite-loader": "^4.1.6"
+  },
+  "peerDependencies": {
+    "gatsby": "2.x"
+  },
+  "scripts": {
+    "postversion": "git push && git push --tags"
+  }
+}
