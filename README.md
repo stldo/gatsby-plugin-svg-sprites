@@ -1,6 +1,6 @@
 # gatsby-plugin-svg-sprite-loader
 
-Gatsby plugin for creating SVG sprites using [SVG sprite loader](https://github.com/kisenka/svg-sprite-loader).
+Gatsby plugin for creating SVG sprites using __[SVG sprite loader](https://github.com/JetBrains/svg-sprite-loader)__.
 
 ## Install
 
@@ -30,11 +30,11 @@ module.exports = {
 
 ### options
 
-The `options` parameter is passed directly to SVG sprite loader, more info about these options can be found on [SVG sprite loader documentation](https://github.com/kisenka/svg-sprite-loader). By default, this plugin sets `extract` option to `true`, `spriteFilename` to `'sprites.[contenthash].svg'` and `symbolId` to `'[name]--[hash:base64:5]'`. The naming convention is the same as that used by Gatsby for CSS files.
+The `options` parameter is passed directly to __SVG sprite loader__, the documentation can be found on [SVG sprite loader documentation](https://github.com/JetBrains/svg-sprite-loader). By default, this plugin sets `extract` option to `true`, `spriteFilename` to `'sprites.[contenthash].svg'` and `symbolId` to `'[name]--[hash:base64:5]'` — the naming convention is the same used by Gatsby for CSS files.
 
 ### pluginOptions
 
-The `pluginOptions` parameter is passed to `svg-sprite-loader/plugin`. If the items in the sprite will only be referred via `<use xlinkHref='...'/>`, and not in CSS or `<img>` elements, it is recommended to set `plainSprite` option to `true`, as it allows SVG sprite loader to generate a simpler output.
+The `pluginOptions` parameter is passed to `svg-sprite-loader/plugin`. If the images will only be referred using `<use xlinkHref='...'/>` — and never inside CSS or `<img>` elements — set `plainSprite` option to `true`, so __SVG sprite loader__ will generate a lighter output file.
 
 ## Usage
 
