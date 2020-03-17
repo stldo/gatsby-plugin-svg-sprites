@@ -1,6 +1,6 @@
 # gatsby-plugin-svg-sprite-loader
 
-Gatsby plugin for creating SVG sprites using __[SVG sprite loader](https://github.com/JetBrains/svg-sprite-loader)__.
+Gatsby plugin for creating SVG sprites using [SVG sprite loader](https://github.com/JetBrains/svg-sprite-loader).
 
 ## Install
 
@@ -34,7 +34,7 @@ The `options` parameter is passed directly to __SVG sprite loader__, the documen
 
 ### pluginOptions
 
-The `pluginOptions` parameter is passed to `svg-sprite-loader/plugin`. If the images will only be referred using `<use xlinkHref='...'/>` — and never inside CSS or `<img>` elements — set `plainSprite` option to `true`, so __SVG sprite loader__ will generate a lighter output file.
+The `pluginOptions` parameter is passed to `svg-sprite-loader/plugin` — if `extract` is set to `true` in the `options` parameter. If the images are being defined only inside `<use xlinkHref='...'/>` — and never inside CSS or `<img>` elements — set `plainSprite` option to `true`, so __SVG sprite loader__ will generate a lighter output file.
 
 ## Usage
 

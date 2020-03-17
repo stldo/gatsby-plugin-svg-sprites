@@ -29,7 +29,9 @@ exports.onCreateWebpackConfig = (
     options
   })
 
-  config.plugins.push(new SvgSpriteLoaderPlugin(pluginOptions))
+  if (options.extract) {
+    config.plugins.push(new SvgSpriteLoaderPlugin(pluginOptions))
+  }
 
   actions.replaceWebpackConfig(config)
 }
