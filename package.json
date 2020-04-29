@@ -14,7 +14,7 @@
     "svg-sprite-loader"
   ],
   "dependencies": {
-    "svg-sprite-loader": "^4.2.1"
+    "svg-sprite-loader": "^4.2.6"
   },
   "peerDependencies": {
     "gatsby": "2.x"
