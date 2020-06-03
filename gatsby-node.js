@@ -2,7 +2,7 @@ const SvgSpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 
 exports.onCreateWebpackConfig = (
   { actions, getConfig, rules },
-  { pluginOptions = {}, plugins, ...options } /* Ignore 'plugins' parameter */
+  { pluginOptions = {}, _: plugins, ...options } /* Skip 'plugins' property */
 ) => {
   const config = getConfig()
   const imagesTest = String(rules.images().test)
@@ -13,11 +13,8 @@ exports.onCreateWebpackConfig = (
     }
   }
 
-  if (!options.hasOwnProperty('extract')) {
-    options.extract = true
-  }
-
   options = {
+    extract: true,
     spriteFilename: 'sprites.[contenthash].svg',
     symbolId: '[name]--[hash:base64:5]',
     ...options
