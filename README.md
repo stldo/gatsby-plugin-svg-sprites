@@ -1,6 +1,7 @@
 # gatsby-plugin-svg-sprite-loader
 
-Gatsby plugin for creating SVG sprites using [SVG sprite loader](https://github.com/JetBrains/svg-sprite-loader).
+Gatsby plugin for creating SVG sprites using
+[SVG sprite loader](https://github.com/JetBrains/svg-sprite-loader).
 
 ## Install
 
@@ -28,17 +29,31 @@ module.exports = {
 }
 ```
 
+## Options
+
 ### options
 
-The `options` parameter is passed directly to __SVG sprite loader__, the documentation can be found on [SVG sprite loader documentation](https://github.com/JetBrains/svg-sprite-loader). By default, this plugin sets `extract` option to `true`, `spriteFilename` to `'sprites.[contenthash].svg'` and `symbolId` to `'[name]--[hash:base64:5]'` — the naming convention is the same used by Gatsby for CSS files.
+Default: `{ extract: true, spriteFilename: 'sprites.[contenthash].svg', symbolId: '[name]--[hash:base64:5]' }`. Type: `Object`.
+
+The `options` object is passed directly to __SVG sprite loader__, more info can
+be found [here](https://github.com/JetBrains/svg-sprite-loader#configuration).
+To maintain consistency, `spriteFilename` and `symbolId` formatting are to the
+same formats used by Gatsby.js for CSS files.
 
 ### pluginOptions
 
-The `pluginOptions` parameter is passed to `svg-sprite-loader/plugin` — if `extract` is set to `true` in the `options` parameter. If the images are being defined only inside `<use xlinkHref='...'/>` — and never inside CSS or `<img>` elements — set `plainSprite` option to `true`, so __SVG sprite loader__ will generate a lighter output file.
+Default: `{}`. Type: `Object`.
+
+The `pluginOptions` parameter is passed to `svg-sprite-loader/plugin` — if
+`extract` is set to `true` in the `options` parameter. If the sprites are used
+only inside `<use xlinkHref='...'/>` — and never referenced in CSS files or as
+`src` attribute of `<img>` elements — set `plainSprite` option to `true` to
+allow __SVG sprite loader__ to generate a smaller output.
 
 ## Usage
 
-If `extract` mode is enabled (set to `true` by default), use `sprite.url` in `xlinkHref` prop. Otherwise, use `sprite.id`.
+If `extract` mode is enabled (set to `true` by default), use `sprite.url` in
+`xlinkHref` prop. Otherwise, use `sprite.id`.
 
 ```javascript
 /* extract === true (default) */
@@ -63,6 +78,15 @@ export default () => (
   </svg>
 )
 ```
+
+## Known bugs
+
+There's an open bug on __SVG sprite loader__ that wasn't fixed yet (more info on
+[#334](https://github.com/JetBrains/svg-sprite-loader/issues/334),
+[#337](https://github.com/JetBrains/svg-sprite-loader/issues/337) and
+[#363](https://github.com/JetBrains/svg-sprite-loader/issues/363)
+), which generates invalid ESM code in some specific situations. If you're
+having some troubles, try setting the option `esModule` to `false`.
 
 ## License
 
