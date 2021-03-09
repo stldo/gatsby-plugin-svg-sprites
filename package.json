@@ -16,9 +16,6 @@
   "dependencies": {
     "svg-sprite-loader": "^5.0.0"
   },
-  "peerDependencies": {
-    "gatsby": "2.x"
-  },
   "scripts": {
     "postversion": "git push && git push --tags"
   }
