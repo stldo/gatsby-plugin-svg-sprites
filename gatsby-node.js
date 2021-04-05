@@ -1,34 +1,46 @@
-const SvgSpriteLoaderPlugin = require('svg-sprite-loader/plugin')
+const SvgStorePlugin = require('external-svg-sprite-loader')
+const path = require('path')
+
+const gatsbyTypescriptPluginFix = require('./lib/gatsby-typescript-plugin-fix')
 
 exports.onCreateWebpackConfig = (
   { actions, getConfig, rules },
-  { pluginOptions = {}, _: plugins, ...options } /* Skip 'plugins' property */
+  { pluginOptions = {}, _: plugins /* Skip 'plugins' property */, ...options }
 ) => {
   const config = getConfig()
-  const imagesTest = String(rules.images().test)
+  const imagesRule = rules.images()
+  const imagesRuleTest = String(imagesRule.test)
 
-  for (let rule of config.module.rules) {
-    if (String(rule.test) === imagesTest) {
-      rule.test = new RegExp(imagesTest.replace('svg|', '').slice(1, -1))
-    }
-  }
-
-  options = {
-    extract: true,
-    spriteFilename: 'sprites.[contenthash].svg',
-    symbolId: '[name]--[hash:base64:5]',
+  const loaderOptions = {
+    name: 'sprites.[contenthash].svg',
+    iconName: '[name]--[hash:base64:5]',
     ...options
   }
 
-  config.module.rules.push({
-    test: /\.svg$/,
-    loader: require.resolve('svg-sprite-loader'),
-    options
-  })
+  config.module.rules = [
+    ...config.module.rules.filter(rule => (
+      String(rule.test) !== imagesRuleTest
+    )),
 
-  if (options.extract) {
-    config.plugins.push(new SvgSpriteLoaderPlugin(pluginOptions))
-  }
+    {
+      test: /\.svg$/,
+      use: [
+        path.resolve(__dirname, './lib/external-svg-sprite-loader-patch'),
+        { loader: SvgStorePlugin.loader, options: loaderOptions },
+      ]
+    },
+
+    {
+      ...imagesRule,
+      test: new RegExp(imagesRuleTest.replace('svg|', '').slice(1, -1))
+    }
+  ]
+
+  config.plugins = [
+    ...config.plugins,
+    new gatsbyTypescriptPluginFix(),
+    new SvgStorePlugin(pluginOptions)
+  ]
 
   actions.replaceWebpackConfig(config)
 }

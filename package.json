@@ -10,11 +10,10 @@
     "gatsby-plugin",
     "svg",
     "sprite",
-    "svg sprite",
-    "svg-sprite-loader"
+    "svg sprite"
   ],
   "dependencies": {
-    "svg-sprite-loader": "^5.0.0"
+    "external-svg-sprite-loader": "^7.1.2"
   },
   "scripts": {
     "postversion": "git push && git push --tags"
