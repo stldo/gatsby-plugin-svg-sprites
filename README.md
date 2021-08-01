@@ -20,9 +20,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-svg-sprite-loader`,
       options: {
-        /* External SVG Sprite loader options */
+        /* ...External SVG Sprite loader options */
         pluginOptions: {
-          /* External SVG Sprite plugin options */
+          /* ...External SVG Sprite plugin options */
         }
       },
     },
