@@ -1,4 +1,4 @@
-# gatsby-plugin-svg-sprite-loader
+# gatsby-plugin-svg-sprites
 
 Gatsby plugin for creating SVG sprites using [External SVG Sprite][1].
 
@@ -7,7 +7,7 @@ Gatsby plugin for creating SVG sprites using [External SVG Sprite][1].
 ## Install
 
 ```bash
-$ npm install gatsby-plugin-svg-sprite-loader
+$ npm install gatsby-plugin-svg-sprites
 ```
 
 ## Configure
@@ -18,7 +18,7 @@ $ npm install gatsby-plugin-svg-sprite-loader
 module.exports = {
   plugins: [
     {
-      resolve: `gatsby-plugin-svg-sprite-loader`,
+      resolve: `gatsby-plugin-svg-sprites`,
       options: {
         /* ...External SVG Sprite loader options */
         pluginOptions: {
@@ -68,14 +68,6 @@ export default () => (
   background-image: url('images/icon.svg') no-repeat 0;
 }
 ```
-
-## Updating from v0.1.* to v0.2.*
-
-While v0.1.* uses __SVG sprite loader__ under the hood, v0.2.* uses
-__External SVG Sprite__. The new package returns the sprite url using the
-`symbol` property, while __SVG sprite loader__ uses `url`. A patch was created
-to return the value inside the `url` property, among with `symbol`. If the
-default options were being used in v0.1.*, no difference should be noticed.
 
 ## License
 
