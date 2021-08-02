@@ -1,6 +1,7 @@
 # gatsby-plugin-svg-sprites
 
-Gatsby plugin for creating SVG sprites using [External SVG Sprite][1].
+Gatsby plugin to generate SVG sprites from imported files using
+[External SVG Sprite][1].
 
 [1]: https://github.com/bensampaio/external-svg-sprite-loader
 
@@ -60,6 +61,8 @@ The `pluginOptions` parameter is passed to __External SVG Sprite__ plugin.
 
 ## Usage
 
+### JavaScript
+
 ```javascript
 import React from 'react'
 import icon from 'images/icon.svg'
@@ -70,6 +73,8 @@ export default () => (
   </svg>
 )
 ```
+
+### CSS
 
 ```css
 .icon {

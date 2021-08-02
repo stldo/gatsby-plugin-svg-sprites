@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-svg-sprites",
-  "description": "Create SVG sprites from imported files",
+  "description": "Gatsby plugin to generate SVG sprites from imported files",
   "version": "0.0.2",
   "author": "stldo (https://github.com/stldo)",
   "license": "MIT",
