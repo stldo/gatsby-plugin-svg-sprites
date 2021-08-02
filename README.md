@@ -20,10 +20,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-svg-sprites`,
       options: {
-        /* ...External SVG Sprite loader options */
+        optimize: process.env.NODE_ENV === 'production',
         pluginOptions: {
           /* ...External SVG Sprite plugin options */
         }
+        /* ...External SVG Sprite loader options */
       },
     },
   ],
@@ -43,6 +44,13 @@ info can be found [here][2]. To keep consistency, `name` and `iconName` default
 values use the same formats used by Gatsby.js for CSS files.
 
 [2]: https://github.com/bensampaio/external-svg-sprite-loader#options
+
+### optimize
+
+Default: `process.env.NODE_ENV === 'production'`; Type: `boolean`.
+
+With this option, the sprites file ids will be minified. By default, it is
+enabled on production environments.
 
 ### pluginOptions
 

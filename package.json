@@ -13,7 +13,8 @@
     "svg sprite"
   ],
   "dependencies": {
-    "external-svg-sprite-loader": "^7.2.0"
+    "external-svg-sprite-loader": "^7.2.0",
+    "incstr": "^1.2.3"
   },
   "scripts": {
     "postversion": "git push && git push --tags"
