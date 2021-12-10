@@ -2,7 +2,7 @@ const SvgStorePlugin = require('external-svg-sprite-loader')
 const incstr = require('incstr')
 const path = require('path')
 
-const gatsbyTypescriptPluginFix = require('./lib/gatsby-typescript-plugin-fix')
+const GatsbyTypescriptPluginFix = require('./lib/gatsby-typescript-plugin-fix')
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
@@ -52,7 +52,7 @@ exports.onCreateWebpackConfig = (
       test: /\.svg$/,
       use: [
         path.resolve(__dirname, './lib/external-svg-sprite-loader-patch'),
-        { loader: SvgStorePlugin.loader, options: loaderOptions },
+        { loader: SvgStorePlugin.loader, options: loaderOptions }
       ]
     },
 
@@ -64,7 +64,7 @@ exports.onCreateWebpackConfig = (
 
   config.plugins = [
     ...config.plugins,
-    new gatsbyTypescriptPluginFix(),
+    new GatsbyTypescriptPluginFix(),
     new SvgStorePlugin(pluginOptions)
   ]
 
