@@ -1,33 +1,10 @@
 const SvgStorePlugin = require('external-svg-sprite-loader')
-const incstr = require('incstr')
-const path = require('path')
+const { resolve } = require('path')
 
 const GatsbyTypescriptPluginFix = require('./lib/gatsby-typescript-plugin-fix')
+const getOptimizedIconName = require('./lib/get-optimized-icon-name')
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
-
-const cache = {}
-
-function getOptimizedIconName (path) {
-  if (!cache.iconNameMap) {
-    cache.iconNameMap = new Map()
-  }
-
-  let iconName = cache.iconNameMap.get(path)
-
-  if (!iconName) {
-    if (!cache.nextId) {
-      cache.nextId = incstr.idGenerator({
-        alphabet: 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ0123456789'
-      })
-    }
-
-    iconName = cache.nextId()
-    cache.iconNameMap.set(path, iconName)
-  }
-
-  return iconName
-}
 
 exports.onCreateWebpackConfig = (
   { actions, getConfig, rules },
@@ -51,7 +28,7 @@ exports.onCreateWebpackConfig = (
     {
       test: /\.svg$/,
       use: [
-        path.resolve(__dirname, './lib/external-svg-sprite-loader-patch'),
+        resolve(__dirname, './lib/external-svg-sprite-loader-patch.js'),
         { loader: SvgStorePlugin.loader, options: loaderOptions }
       ]
     },

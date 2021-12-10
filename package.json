@@ -26,5 +26,8 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0"
+  },
+  "peerDependencies": {
+    "gatsby": "^4.0.0"
   }
 }
