@@ -6,19 +6,16 @@ const getOptimizedIconName = require('./lib/get-optimized-icon-name')
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
-exports.onCreateWebpackConfig = (
-  { actions, getConfig, rules },
-  { plugins: _, pluginOptions = {}, optimize = IS_PRODUCTION, ...options }
-) => {
+exports.onCreateWebpackConfig = ({ actions, getConfig, rules }, {
+  addSymbolPropertyName = false,
+  plugins: _,
+  pluginOptions = {},
+  optimize = IS_PRODUCTION,
+  ...externalSvgSpriteLoaderOptions
+}) => {
   const config = getConfig()
   const imagesRule = rules.images()
   const imagesRuleTest = String(imagesRule.test)
-
-  const loaderOptions = {
-    name: 'sprites.[contenthash].svg',
-    iconName: optimize ? getOptimizedIconName : '[name]--[hash:base64:5]',
-    ...options
-  }
 
   config.module.rules = [
     ...config.module.rules.filter(rule => (
@@ -27,10 +24,19 @@ exports.onCreateWebpackConfig = (
 
     {
       test: /\.svg$/,
-      use: [
-        resolve(__dirname, './lib/external-svg-sprite-loader-patch.js'),
-        { loader: SvgStorePlugin.loader, options: loaderOptions }
-      ]
+      use: [{
+        loader: resolve(__dirname, 'lib', 'add-symbol-property-name.js'),
+        options: {
+          addSymbolPropertyName
+        }
+      }, {
+        loader: SvgStorePlugin.loader,
+        options: {
+          name: 'sprites.[contenthash].svg',
+          iconName: optimize ? getOptimizedIconName : '[name]--[hash:base64:5]',
+          ...externalSvgSpriteLoaderOptions
+        }
+      }]
     },
 
     {

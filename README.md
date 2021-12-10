@@ -29,7 +29,7 @@ import icon from 'images/icon.svg'
 
 export default () => (
   <svg viewBox={icon.viewBox}>
-    <use xlinkHref={icon.url}/>
+    <use xlinkHref={icon.symbol}/>
   </svg>
 )
 ```
@@ -50,6 +50,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-svg-sprites`,
       // options: {
+      //   addSymbolPropertyName: false,
       //   optimize: process.env.NODE_ENV === 'production',
       //   pluginOptions: {
       //     // ...External SVG Sprite plugin options
@@ -70,6 +71,26 @@ Default:
 The `options` object is passed to __External SVG Sprite__ loader — more info
 about it can be found [here][2]. To keep consistency, `name` and `iconName`
 default values use the same formats used by Gatsby.js for CSS files.
+
+### addSymbolPropertyName
+
+Type: `string` or `false`. Default: `false`.
+
+By default, __External SVG Sprite__ returns the URL in the `symbol` property.
+This option adds another property name to access this value.
+
+— With `addSymbolPropertyName` set to `url`:
+
+```js
+import React from 'react'
+import icon from 'images/icon.svg'
+
+export default () => (
+  <svg viewBox={icon.viewBox}>
+    <use xlinkHref={icon.url}/> // Access the sprite URL using `url` property
+  </svg>
+)
+```
 
 ### optimize
 
