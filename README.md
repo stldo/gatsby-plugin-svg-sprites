@@ -14,7 +14,7 @@ Enable the plugin in `gatsby-config.js`:
 ```js
 module.exports = {
   plugins: [
-    `gatsby-plugin-svg-sprites`
+    'gatsby-plugin-svg-sprites'
   ]
 }
 ```
@@ -48,7 +48,7 @@ export default () => (
 module.exports = {
   plugins: [
     {
-      resolve: `gatsby-plugin-svg-sprites`,
+      resolve: 'gatsby-plugin-svg-sprites',
       // options: {
       //   addSymbolPropertyName: false,
       //   optimize: process.env.NODE_ENV === 'production',
