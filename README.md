@@ -48,7 +48,7 @@ export default () => (
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-plugin-svg-sprites',
+      resolve: 'gatsby-plugin-svg-sprites'
       // options: {
       //   optimize: process.env.NODE_ENV === 'production',
       //   pluginOptions: {
