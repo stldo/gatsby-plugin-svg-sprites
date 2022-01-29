@@ -1,27 +1,34 @@
-# gatsby-plugin-svg-sprites
+# gatsby-plugin-svg-sprites [![npm][1]][2]
+
+> __Breaking change:__ `svg.symbol` property was renamed to `svg.url` in v4.2.0.
 
 Gatsby plugin to generate SVG sprites from imported files. The sprites are
-generated using [External SVG Sprite][1].
+generated using [External SVG Sprite][3].
 
-## Install
+## Installation
 
 ```sh
-$ npm install gatsby-plugin-svg-sprites
-```
-
-Enable the plugin in `gatsby-config.js`:
-
-```js
-module.exports = {
-  plugins: [
-    'gatsby-plugin-svg-sprites'
-  ]
-}
+npm install gatsby-plugin-svg-sprites
 ```
 
 ## Usage
 
-### JavaScript
+```js
+/* gatsby-config.js */
+
+module.exports = {
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-svg-sprites'
+      options: {
+        /* gatsby-plugin-svg-sprites options here */
+      }
+    }
+  ]
+}
+```
+
+### JavaScript import
 
 ```js
 import React from 'react'
@@ -29,7 +36,7 @@ import icon from 'images/icon.svg'
 
 export default () => (
   <svg viewBox={icon.viewBox}>
-    <use xlinkHref={icon.symbol}/>
+    <use xlinkHref={icon.url}/>
   </svg>
 )
 ```
@@ -42,42 +49,14 @@ export default () => (
 }
 ```
 
-## Configure
+## Options
 
-```js
-module.exports = {
-  plugins: [
-    {
-      resolve: 'gatsby-plugin-svg-sprites'
-      // options: {
-      //   optimize: process.env.NODE_ENV === 'production',
-      //   pluginOptions: {
-      //     // ...External SVG Sprite plugin options
-      //   },
-      //   symbolPropertyName
-      //   // ...External SVG Sprite loader options
-      // }
-    }
-  ]
-}
-```
-
-### options
-
-Type: `Object`.
-Default:
-`{ name: 'sprites.[contenthash].svg', iconName: '[name]--[hash:base64:5]' }`.
-
-The `options` object is passed to __External SVG Sprite__ loader — more info
-about it can be found [here][2]. To keep consistency, `name` and `iconName`
-default values use the same formats used by Gatsby.js for CSS files.
-
-### optimize
+### minifyIds
 
 Type: `boolean`. Default: `process.env.NODE_ENV === 'production'`.
 
-With `optimize` enabled, the sprites ids will be minified. By default, it is
-enabled on production environments.
+Minify symbol ids, enabled if `process.env.NODE_ENV === 'production'` by
+default.
 
 ### pluginOptions
 
@@ -85,30 +64,27 @@ Type: `Object`. Default: `{}`.
 
 The `pluginOptions` parameter is passed to __External SVG Sprite__ plugin.
 
-### symbolPropertyName
+### External SVG Sprite options
 
-Type: `string` or `false`. Default: `false`.
-
-By default, __External SVG Sprite__ returns the URL in the `symbol` property.
-This option sets another property name to access this value.
-
-— With `symbolPropertyName` set to `url`:
+Any other option passed to `gatsby-plugin-svg-sprites` will be passed to
+`external-svg-sprite-loader` — more info about its options can be found
+[here][4]. By default, this plugin will set the following options:
 
 ```js
-import React from 'react'
-import icon from 'images/icon.svg'
-
-export default () => (
-  <svg viewBox={icon.viewBox}>
-    <use xlinkHref={icon.url}/> // Access the sprite URL using `url` property
-  </svg>
-)
+{
+  iconName: '[name]--[hash:base64:5]',
+  name: 'sprites.[contenthash].svg'
+}
 ```
+
+> Note: if `minifyIds` is set to `true`, `iconName` will be ignored.
 
 ## License
 
 [The MIT License][license]
 
-[1]: https://github.com/bensampaio/external-svg-sprite-loader
-[2]: https://github.com/bensampaio/external-svg-sprite-loader#options
+[1]: https://img.shields.io/npm/v/gatsby-plugin-svg-sprites
+[2]: https://www.npmjs.com/package/gatsby-plugin-svg-sprites
+[3]: https://github.com/bensampaio/external-svg-sprite-loader
+[4]: https://github.com/bensampaio/external-svg-sprite-loader#options
 [license]: ./LICENSE
