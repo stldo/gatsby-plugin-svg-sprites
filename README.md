@@ -1,6 +1,7 @@
 # gatsby-plugin-svg-sprites [![npm][1]][2]
 
-> __Breaking change:__ `svg.symbol` property was renamed to `svg.url` in v4.2.0.
+> ⚠️ __Breaking change:__ `svg.symbol` property was renamed to `svg.url` in
+> v4.2.0.
 
 Gatsby plugin to generate SVG sprites from imported files. The sprites are
 generated using [External SVG Sprite][3].
