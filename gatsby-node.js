@@ -1,6 +1,7 @@
 const SvgStorePlugin = require('external-svg-sprite-loader')
 const { resolve } = require('path')
 
+const fixRulesDeclarations = require('./lib/fix-rules-declarations')
 const GatsbyTypescriptPluginFix = require('./lib/gatsby-typescript-plugin-fix')
 const getMinifiedId = require('./lib/get-minified-id')
 
@@ -14,6 +15,8 @@ exports.onCreateWebpackConfig = ({ actions, getConfig, rules }, {
   const config = getConfig()
   const imagesRule = rules.images()
   const imagesRuleTest = String(imagesRule.test)
+
+  fixRulesDeclarations(config.module.rules)
 
   config.module.rules = [
     ...config.module.rules.filter(rule => (
