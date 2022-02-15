@@ -35,6 +35,8 @@ exports.onCreateWebpackConfig = ({ actions, getConfig, rules }, {
           iconName: minifyIds ? getMinifiedId : iconName,
           ...externalSvgSpriteLoaderOptions
         }
+      }, {
+        loader: resolve(__dirname, 'lib', 'disable-cacheable.js')
       }]
     },
 
