@@ -1,3 +1,4 @@
+const { createHash } = require('crypto')
 const SvgStorePlugin = require('external-svg-sprite-loader')
 const { resolve } = require('path')
 
@@ -5,16 +6,31 @@ const fixRulesDeclarations = require('./lib/fix-rules-declarations')
 const GatsbyTypescriptPluginFix = require('./lib/gatsby-typescript-plugin-fix')
 const getMinifiedId = require('./lib/get-minified-id')
 
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
+
+let randomContentHashValue = null
+
 exports.onCreateWebpackConfig = ({ actions, getConfig, rules }, {
   iconName = '[name]--[hash:base64:5]',
-  minifyIds = process.env.NODE_ENV === 'production',
+  minifyIds = IS_PRODUCTION,
+  name = 'sprites.[contenthash].svg',
   pluginOptions = {},
   plugins: _,
+  randomContentHash = false,
   ...externalSvgSpriteLoaderOptions
 }) => {
   const config = getConfig()
   const imagesRule = rules.images()
   const imagesRuleTest = String(imagesRule.test)
+
+  if (IS_PRODUCTION && randomContentHash && name.includes('[contenthash]')) {
+    if (randomContentHashValue === null) {
+      randomContentHashValue = createHash('md4')
+        .update(`${Math.random()}`)
+        .digest('hex')
+    }
+    name = name.replace('[contenthash]', randomContentHashValue)
+  }
 
   fixRulesDeclarations(config.module.rules)
 
@@ -31,8 +47,8 @@ exports.onCreateWebpackConfig = ({ actions, getConfig, rules }, {
       }, {
         loader: SvgStorePlugin.loader,
         options: {
-          name: 'sprites.[contenthash].svg',
           iconName: minifyIds ? getMinifiedId : iconName,
+          name,
           ...externalSvgSpriteLoaderOptions
         }
       }, {
