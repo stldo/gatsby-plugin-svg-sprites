@@ -1,8 +1,5 @@
 # gatsby-plugin-svg-sprites [![npm][1]][2]
 
-> ⚠️ __Breaking change:__ `svg.symbol` property was renamed to `svg.url` in
-> v4.2.0.
-
 > ⚠️ If you are getting "sprites.[contenthash].svg" URLs in production, please
 > check the "[Known issues][3]" section for possible solutions.
 
